@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import BountiesContract from './contracts/Bounties.json'
+import BlogsContract from './contracts/Blogs.json'
 import getWeb3 from "./utils/getWeb3";
 import { setJSON, getJSON } from './utils/IPFS.js'
 
-import { Button } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form'
-import { FormGroup } from 'react-bootstrap';
-import { FormControl } from 'react-bootstrap';
+// import { Button } from 'react-bootstrap';
+// import Form from 'react-bootstrap/Form'
+// import { FormGroup } from 'react-bootstrap';
+// import { FormControl } from 'react-bootstrap';
 // import HelpBlock from 'react-bootstrap/HelpBlock';
 // import { Grid } from  'react-bootstrap/Gri';
-import { Row } from  'react-bootstrap';
+// import { Row } from  'react-bootstrap';
 // import Panel from 'react-bootstrap/Panel'
 // import Table from 'react-bootstrap/Table'
 
@@ -29,18 +29,24 @@ class App extends Component {
 
     this.state = {
       storageValue: 0,
-      bountiesInstance: undefined,
-      bountyAmount: undefined,
-      bountyData: undefined,
-      bountyDeadline: undefined,
-      bounties: [],
+      blogsInstance: undefined,
+      // bountiesInstance: undefined,
+      blogContent: undefined,
+      // bountyData: undefined,
+      supportAmount: undefined,
+      // bountyAmount: undefined,
+      // bountyDeadline: undefined,
+      blogs: [],
+      // bounties: [],
       etherscanLink: "https://rinkeby.etherscan.io",
       account: null,
       web3: null
     }
 
-    this.handleIssueBounty = this.handleIssueBounty.bind(this)
+    this.handleCreateBlog = this.handleCreateBlog.bind(this)
+    // this.handleIssueBounty = this.handleIssueBounty.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    // this.handleChange = this.handleChange.bind(this)
 }
 
   componentDidMount = async () => {
@@ -53,16 +59,18 @@ class App extends Component {
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = BountiesContract.networks[networkId];
+      const deployedNetwork = BlogsContract.networks[networkId];
+      console.log('dd', networkId)
+      // const deployedNetwork = BountiesContract.networks[networkId];
       const instance = new web3.eth.Contract(
-        BountiesContract.abi,
+        BlogsContract.abi,
         deployedNetwork && deployedNetwork.address,
       );
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ bountiesInstance: instance, web3: web3, account: accounts[0]})
-      // this.addEventListener(this)
+      this.setState({ blogsInstance: instance, web3: web3, account: accounts[0]})
+      this.addEventListener(this)
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -70,7 +78,7 @@ class App extends Component {
       );
       console.error(error);
     }
-    this.addEventListener(this)
+    // this.addEventListener(this)
   };
 
   // Handle form data change
@@ -78,14 +86,14 @@ class App extends Component {
   handleChange(event)
   {
       switch(event.target.name) {
-          case "bountyData":
-              this.setState({"bountyData": event.target.value})
+          case "blogContent":
+              this.setState({"blogContent": event.target.value})
               break;
-          case "bountyDeadline":
-              this.setState({"bountyDeadline": event.target.value})
-              break;
-          case "bountyAmount":
-              this.setState({"bountyAmount": event.target.value})
+          // case "bountyDeadline":
+          //     this.setState({"bountyDeadline": event.target.value})
+          //     break;
+          case "supportAmount":
+              this.setState({"supportAmount": event.target.value})
               break;
           default:
               break;
@@ -104,12 +112,13 @@ class App extends Component {
   //   }
   // }
 
-  async handleIssueBounty(event)
+  async handleCreateBlog(event)
   {
-    if (typeof this.state.bountiesInstance !== 'undefined') {
+    if (typeof this.state.blogsInstance !== 'undefined') {
       event.preventDefault();
-      const ipfsHash = await setJSON({ bountyData: this.state.bountyData });
-      let result = await this.state.bountiesInstance.methods.issueBounty(ipfsHash,this.state.bountyDeadline).send({from: this.state.account, value: this.state.web3.utils.toWei(this.state.bountyAmount, 'ether')})
+      const ipfsHash = await setJSON({ blogContent: this.state.blogContent });
+      let result = await this.state.blogsInstance.methods.createBlog(ipfsHash).send({from: this.state.account});
+      // let result = await this.state.blogsInstance.methods.createBlog(ipfsHash,this.state.bountyDeadline).send({from: this.state.account, value: this.state.web3.utils.toWei(this.state.bountyAmount, 'ether')})
       this.setLastTransactionDetails(result)
     }
   }
@@ -128,7 +137,7 @@ class App extends Component {
 
   addEventListener(component) {
 
-    this.state.bountiesInstance.events.BountyIssued({fromBlock: 0, toBlock: 'latest'})
+    this.state.blogsInstance.events.BlogCreated({fromBlock: 0, toBlock: 'latest'})
     .on('data', async function(event){
       //First get the data from ipfs and add it to the event
       var ipfsJson = {}
@@ -137,22 +146,22 @@ class App extends Component {
       }
       catch(e)
       {
-
+        console.log(e)
       }
 
       if(ipfsJson.bountyData !== undefined)
       {
-        event.returnValues['bountyData'] = ipfsJson.bountyData;
+        event.returnValues['blogContent'] = ipfsJson.blogContent;
         event.returnValues['ipfsData'] = ipfsBaseUrl+"/"+event.returnValues.data;
       }
       else {
         event.returnValues['ipfsData'] = "none";
-        event.returnValues['bountyData'] = event.returnValues['data'];
+        event.returnValues['blogContent'] = event.returnValues['data'];
       }
 
-      var newBountiesArray = component.state.bounties.slice()
-      newBountiesArray.push(event.returnValues)
-      component.setState({ bounties: newBountiesArray })
+      var newBlogssArray = component.state.blogs.slice()
+      newBlogssArray.push(event.returnValues)
+      component.setState({ blogs: newBlogssArray })
     })
     .on('error', console.error);
 }
@@ -165,24 +174,24 @@ class App extends Component {
           <div className="App">
                   
                   
-                  {/* <a href={this.state.etherscanLink} target="_blank">Last Transaction Details</a> */}
+                  <a href={this.state.etherscanLink} target="_blank">Last Transaction Details</a>
                   
                 
                   
-                  <form onSubmit={this.handleIssueBounty}>
+                  <form onSubmit={this.handleCreateBlog}>
                       <div className="form-group"
                       >
                         <div className="form-control">
                           <label>Enter bounty data</label>
-                          <textArea
-                          name="bountyData"
-                          value={this.state.bountyData}
+                          <textarea
+                          name="blogContent"
+                          value={this.state.blogContent}
                           placeholder="Enter bounty details"
-                          onChange={this.handleChange}></textArea>
+                          onChange={this.handleChange}></textarea>
                         </div>
                         <br/>
           
-                        <div className="form-control">
+                        {/* <div className="form-control">
                           <label>Enter bounty deadline in seconds since epoch</label>
                           <input
                           type="text"
@@ -193,8 +202,8 @@ class App extends Component {
                           ></input>
                         </div>
                         <br/>
-    
-                        <div className="form-control">
+     */}
+                        {/* <div className="form-control">
                           <label>Enter bounty amount</label>
                           <input
                           type="text"
@@ -204,9 +213,9 @@ class App extends Component {
                           onChange={this.handleChange}
                           >
                           </input>
-                        </div>
+                        </div> */}
                         <br/>
-                        <button type="submit">Issue Bounty</button>
+                        <button type="submit">create blog</button>
                       </div>
                   </form>
 
