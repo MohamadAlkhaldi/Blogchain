@@ -1,18 +1,12 @@
 pragma solidity ^0.5.0;
 
 /**
- * @title Bounties
- * @author Joshua Cassidy- <joshua.cassidy@consensys.net>
+ * @title Blogs
+ * @author Mohamad Alkhaldi
  * @dev Simple smart contract which allows any user to issue a bounty in ETH linked to requirements stored in ipfs
  * which anyone can fufill by submitting the ipfs hash which contains evidence of their fufillment
  */
 contract Blogs {
-
-  /*
-  * Enums
-  */
-
-//   enum BountyStatus { CREATED, ACCEPTED, CANCELLED }
 
   /*
   * Storage

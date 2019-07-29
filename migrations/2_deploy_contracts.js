@@ -1,5 +1,5 @@
-var Blog = artifacts.require("./Blog.sol");
+var Blogs = artifacts.require("./Blogs.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(Blog);
+  deployer.deploy(Blogs);
 };
