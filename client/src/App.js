@@ -60,7 +60,6 @@ class App extends Component {
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
       const deployedNetwork = BlogsContract.networks[networkId];
-      console.log('dd', networkId)
       // const deployedNetwork = BountiesContract.networks[networkId];
       const instance = new web3.eth.Contract(
         BlogsContract.abi,
@@ -149,7 +148,7 @@ class App extends Component {
         console.log(e)
       }
 
-      if(ipfsJson.bountyData !== undefined)
+      if(ipfsJson.blogContent !== undefined)
       {
         event.returnValues['blogContent'] = ipfsJson.blogContent;
         event.returnValues['ipfsData'] = ipfsBaseUrl+"/"+event.returnValues.data;
@@ -167,6 +166,12 @@ class App extends Component {
 }
 
   render() {
+    const options = {
+      onRowClick: function(row) {
+        alert(`You click row id: ${row.id}`);
+      }
+    }
+
     if (!this.state.web3) {
           return <div>Loading Web3, accounts, and contract...</div>;
         }
@@ -221,12 +226,12 @@ class App extends Component {
 
                   <br/>
 
-                  <BootstrapTable data={this.state.bounties} striped hover>
-                    <TableHeaderColumn isKey dataField='bounty_id'>ID</TableHeaderColumn>
-                    <TableHeaderColumn dataField='issuer'>Issuer</TableHeaderColumn>
-                    <TableHeaderColumn dataField='amount'>Amount</TableHeaderColumn>
-                    <TableHeaderColumn dataField='ipfsData'>Bounty Data</TableHeaderColumn>
-                    <TableHeaderColumn dataField='bountyData'>Bounty Data</TableHeaderColumn>
+                  <BootstrapTable data={this.state.blogs} search={ true } options={ options } striped hover>
+                    {/* <TableHeaderColumn isKey dataField='blog_id'>ID</TableHeaderColumn> */}
+                    <TableHeaderColumn isKey dataField='blogger' width='150'>blogger</TableHeaderColumn>
+                    {/* <TableHeaderColumn dataField='amount'>Amount</TableHeaderColumn> */}
+                    <TableHeaderColumn dataField='ipfsData' width='150'>IPFS Data</TableHeaderColumn>
+                    <TableHeaderColumn dataField='blogContent' tdStyle={ { whiteSpace: 'normal' } }>Blog Content</TableHeaderColumn>
                   </BootstrapTable>
 
                 </div>
