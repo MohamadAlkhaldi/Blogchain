@@ -1,18 +1,17 @@
 pragma solidity ^0.5.0;
 
 /**
- * @title Blogs
+ * @title Blogchain
  * @author Mohamad Alkhaldi
- * @dev A smart contract which allows any bloggers to post blogs on the chain and recieve support in ETH
  */
 contract Blogs {
+/// @dev A smart contract which allows any bloggers to post blogs on the chain and recieve support in ETH
 
   /*
   * Storage
   */
 
   Blog[] public blogs;
-
   mapping (uint=>uint) public support;
 
   /*
@@ -26,7 +25,7 @@ contract Blogs {
 
   /**
   * @dev createBlog(): creates a blog
-  * @param _data the requirements of the bounty
+  * @param _data the contents of the blog
   */
   function createBlog(
       string calldata _data
@@ -51,14 +50,11 @@ contract Blogs {
       hasValue()
       notOwner(_blogId)
       {
-          blogs[_blogId].blogger.send(msg.value);
+          blogs[_blogId].blogger.transfer(msg.value);
           uint totalSupport = support[_blogId] + msg.value;
           support[_blogId] = totalSupport;
           emit CoffeBought(_blogId, msg.sender, blogs[_blogId].blogger, msg.value);
       }
-
-  
-
 
   /**
   * Modifiers
