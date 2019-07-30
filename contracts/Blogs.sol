@@ -43,7 +43,7 @@ contract Blogs {
       returns (uint)
   {
       blogs.push(Blog(msg.sender, _data));
-      emit BlogCreated(msg.sender, _data);
+      emit BlogCreated(blogs.length - 1, msg.sender, _data);
     //   emit BountyIssued(bounties.length - 1,msg.sender, msg.value, _data);
       return (blogs.length - 1);
   }
@@ -83,7 +83,7 @@ contract Blogs {
   /**
   * Events
   */
-  event BlogCreated(address blogger, string data);
+  event BlogCreated(uint blog_id, address blogger, string data);
   event CoffeBought(uint blog_id, address sender, address receiver, uint amount);
 
 }

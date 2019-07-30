@@ -168,7 +168,7 @@ class App extends Component {
   render() {
     const options = {
       onRowClick: function(row) {
-        alert(`You click row id: ${row.id}`);
+        alert(`You click row id: ${row.blogger}`);
       }
     }
 
@@ -227,8 +227,8 @@ class App extends Component {
                   <br/>
 
                   <BootstrapTable data={this.state.blogs} search={ true } options={ options } striped hover>
-                    {/* <TableHeaderColumn isKey dataField='blog_id'>ID</TableHeaderColumn> */}
-                    <TableHeaderColumn isKey dataField='blogger' width='150'>blogger</TableHeaderColumn>
+                    <TableHeaderColumn isKey dataField='blog_id' width='150'>ID</TableHeaderColumn>
+                    <TableHeaderColumn dataField='blogger' width='150'>blogger</TableHeaderColumn>
                     {/* <TableHeaderColumn dataField='amount'>Amount</TableHeaderColumn> */}
                     <TableHeaderColumn dataField='ipfsData' width='150'>IPFS Data</TableHeaderColumn>
                     <TableHeaderColumn dataField='blogContent' tdStyle={ { whiteSpace: 'normal' } }>Blog Content</TableHeaderColumn>
