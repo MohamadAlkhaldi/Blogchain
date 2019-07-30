@@ -5,13 +5,15 @@ pragma solidity ^0.5.0;
  * @author Mohamad Alkhaldi
  */
 contract Blogs {
-/// @dev A smart contract which allows any bloggers to post blogs on the chain and recieve support in ETH
+/// @dev A smart contract which allows bloggers to post blogs on the chain and recieve support from readers, in ether
 
   /*
   * Storage
   */
 
   Blog[] public blogs;
+
+  /// @dev mapping between blog Id and the amount of support it's generated
   mapping (uint=>uint) public support;
 
   /*
@@ -25,7 +27,7 @@ contract Blogs {
 
   /**
   * @dev createBlog(): creates a blog
-  * @param _data the contents of the blog
+  * @param _data the contents of the blog, in our case it will be an IPFS reference to the blog content
   */
   function createBlog(
       string calldata _data
@@ -35,7 +37,7 @@ contract Blogs {
   {
       blogs.push(Blog(msg.sender, _data));
       emit BlogCreated(blogs.length - 1, msg.sender, _data);
-      return (blogs.length - 1);
+    //   return (blogs.length - 1);
   }
   
   /**

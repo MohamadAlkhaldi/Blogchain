@@ -19,19 +19,18 @@ module.exports = {
       network_id: "*",
       host: 'localhost',
       port: 8545
-    }
-    // ,
+    },
     // rinkeby: {
     //   provider: new HDWalletProvider(secrets.mnemonic, "https://rinkeby.infura.io/v3/"+secrets.infuraApiKey),
     //   network_id: '4',
     //   "gas":      6500000,
     //   "gasPrice": 100000000000
     // },
-    // ropsten: {
-    //   provider: function() {
-    //     return new HDWalletProvider(secrets.mnemonic, "https://ropsten.infura.io/v3/"+secrets.infuraApiKey)
-    //   },
-    //   network_id: 3
-    // }  
+    ropsten: {
+      provider: function() {
+        return new HDWalletProvider(secrets.mnemonic, "https://ropsten.infura.io/v3/"+secrets.infuraApiKey)
+      },
+      network_id: 3
+    }  
   }
 };

@@ -71,12 +71,12 @@ class App extends Component {
 
   async handleCreateBlog(event)
   {
-    console.log('whaaa')
     if (typeof this.state.blogsInstance !== 'undefined') {
       event.preventDefault();
       const ipfsHash = await setJSON({ blogContent: this.state.blogContent });
+      console.log('whaaa', this.state.blogsInstance.methods)
       let result = await this.state.blogsInstance.methods.createBlog(ipfsHash).send({from: this.state.account});
-      this.setLastTransactionDetails(result)
+      
     }
   }
 
@@ -85,21 +85,9 @@ class App extends Component {
     console.log('in', row.blog_id)
     if (typeof this.state.blogsInstance !== 'undefined') {
       let result = await this.state.blogsInstance.methods.buyCoffee(row.blog_id).send({from: this.state.account, value: this.state.web3.utils.toWei(this.state.value, 'ether')});
-      this.setLastTransactionDetails(result)
     }
   }
 
-  setLastTransactionDetails(result)
-    {
-    if(result.tx !== 'undefined')
-    {
-      this.setState({etherscanLink: etherscanBaseUrl+"/tx/"+result.tx})
-    }
-    else
-    {
-      this.setState({etherscanLink: etherscanBaseUrl})
-    }
-  }
 
   addEventListener(component) {
 
@@ -143,7 +131,6 @@ class App extends Component {
         }
         return (
           <div className="App">
-            <a href={this.state.etherscanLink} target="_blank">Last Transaction Details</a>
             <form onSubmit={this.handleCreateBlog}>
               {/* <div className="form-group"> */}
               <h3>New Blog</h3>
@@ -169,10 +156,11 @@ class App extends Component {
                     <TableHeaderColumn dataField='ipfsData' width='150'>IPFS Data</TableHeaderColumn>
                     <TableHeaderColumn dataField='blogContent' tdStyle={ { whiteSpace: 'normal' } }>Blog Content</TableHeaderColumn>
                   </BootstrapTable>
-
+<br/>
                 </div>
         );
+      }
     }
-}
-
-export default App;
+    
+    export default App;
+    

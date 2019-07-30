@@ -1,0 +1,2 @@
+Deployed on ropsten test network:
+https://ropsten.etherscan.io/address/0xa17f34912812608324d85d91f13e71e110327629
