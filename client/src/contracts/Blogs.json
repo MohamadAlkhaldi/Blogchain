@@ -3954,10 +3954,16 @@
       "links": {},
       "address": "0xD1Ad96e877baC48bCB93349833148f1fB6f771a4",
       "transactionHash": "0x3f74af47f1de9f3da996c8cbfdadbfe0d8413da59a5177875b2731e968aeff9f"
+    },
+    "1564494039530": {
+      "events": {},
+      "links": {},
+      "address": "0xdAcb731763F6CC8cD49703EAb2101ac6c4eB0807",
+      "transactionHash": "0xe5c9e73a4b78f251fc83dc7317942a9a037f09731c665c546bd4df09ae90e51d"
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-30T12:01:15.151Z",
+  "updatedAt": "2019-07-30T13:41:03.058Z",
   "devdoc": {
     "author": "Mohamad Alkhaldi\r",
     "details": "Simple smart contract which allows any user to issue a bounty in ETH linked to requirements stored in ipfs\r which anyone can fufill by submitting the ipfs hash which contains evidence of their fufillment\r",

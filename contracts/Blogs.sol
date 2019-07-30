@@ -3,8 +3,7 @@ pragma solidity ^0.5.0;
 /**
  * @title Blogs
  * @author Mohamad Alkhaldi
- * @dev Simple smart contract which allows any user to issue a bounty in ETH linked to requirements stored in ipfs
- * which anyone can fufill by submitting the ipfs hash which contains evidence of their fufillment
+ * @dev A smart contract which allows any bloggers to post blogs on the chain and recieve support in ETH
  */
 contract Blogs {
 
@@ -26,28 +25,24 @@ contract Blogs {
   }
 
   /**
-   * @dev Contructor
-   */
-  constructor() public {}
-
-  /**
-  * @dev issueBounty(): instantiates a new bounty
+  * @dev createBlog(): creates a blog
   * @param _data the requirements of the bounty
   */
   function createBlog(
       string calldata _data
   )
       external
-    //   payable
-    //   hasValue()
       returns (uint)
   {
       blogs.push(Blog(msg.sender, _data));
       emit BlogCreated(blogs.length - 1, msg.sender, _data);
-    //   emit BountyIssued(bounties.length - 1,msg.sender, msg.value, _data);
       return (blogs.length - 1);
   }
   
+  /**
+  * @dev buyCoffee(): Sends ether to blog's writer
+  * @param _blogId the blog which the reader want support
+  */
   function  buyCoffee(
       uint _blogId
       )
@@ -55,9 +50,8 @@ contract Blogs {
       payable
       hasValue()
       notOwner(_blogId)
-      returns(bool)
       {
-          blogs[_blogId].blogger.transfer(msg.value);
+          blogs[_blogId].blogger.send(msg.value);
           uint totalSupport = support[_blogId] + msg.value;
           support[_blogId] = totalSupport;
           emit CoffeBought(_blogId, msg.sender, blogs[_blogId].blogger, msg.value);

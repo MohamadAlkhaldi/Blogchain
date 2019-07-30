@@ -37,6 +37,7 @@ class App extends Component {
       // bountyAmount: undefined,
       // bountyDeadline: undefined,
       blogs: [],
+      value: '1',
       // bounties: [],
       etherscanLink: "https://rinkeby.etherscan.io",
       account: null,
@@ -44,6 +45,7 @@ class App extends Component {
     }
 
     this.handleCreateBlog = this.handleCreateBlog.bind(this)
+    this.handleBuyCoffee = this.handleBuyCoffee.bind(this)
     // this.handleIssueBounty = this.handleIssueBounty.bind(this)
     this.handleChange = this.handleChange.bind(this)
     // this.handleChange = this.handleChange.bind(this)
@@ -77,7 +79,7 @@ class App extends Component {
       );
       console.error(error);
     }
-    // this.addEventListener(this)
+    this.addEventListener(this)
   };
 
   // Handle form data change
@@ -117,6 +119,17 @@ class App extends Component {
       event.preventDefault();
       const ipfsHash = await setJSON({ blogContent: this.state.blogContent });
       let result = await this.state.blogsInstance.methods.createBlog(ipfsHash).send({from: this.state.account});
+      // let result = await this.state.blogsInstance.methods.createBlog(ipfsHash,this.state.bountyDeadline).send({from: this.state.account, value: this.state.web3.utils.toWei(this.state.bountyAmount, 'ether')})
+      this.setLastTransactionDetails(result)
+    }
+  }
+
+  async handleBuyCoffee(row)
+  {
+    // console.log('in', row.blog_id)
+    if (typeof this.state.blogsInstance !== 'undefined') {
+      // let result = await this.state.blogsInstance.methods.buyCoffee(row.blog_id, '50').call();
+      let result = await this.state.blogsInstance.methods.buyCoffee(row.blog_id).send({from: this.state.account, value: this.state.web3.utils.toWei(this.state.value, 'ether')});
       // let result = await this.state.blogsInstance.methods.createBlog(ipfsHash,this.state.bountyDeadline).send({from: this.state.account, value: this.state.web3.utils.toWei(this.state.bountyAmount, 'ether')})
       this.setLastTransactionDetails(result)
     }
@@ -167,9 +180,7 @@ class App extends Component {
 
   render() {
     const options = {
-      onRowClick: function(row) {
-        alert(`You click row id: ${row.blogger}`);
-      }
+      onRowClick: this.handleBuyCoffee
     }
 
     if (!this.state.web3) {
