@@ -29,6 +29,8 @@ now my blogs are safe and sound on the Ethereum blockchain
 one click, THE POWER OF CRYPTO BABYYY!  
         - Khaled, blogger
 
+### Stretch Requirements
+Since storage on Ethereum is expensive, I used IPFS to store only an IPFS hash that I create when the blog is created, and which  refer to the blog content on IPFS 
 
 ### Installation
 
