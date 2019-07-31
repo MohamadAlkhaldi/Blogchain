@@ -15,7 +15,7 @@ As a Blogger, post your great blogs and wait for readers feedback, a feedback in
 
 check out some of our users stories:
 
-> Always hated being forced to pay for 
+> Always hated being forced to pay for  
 low quality articles, with blogchain I only  
 support when sense great effort and   
 a worthy blogger.  
@@ -66,7 +66,7 @@ $ npm run start
 ### Use Case
 
 1- Create a blog using account 1, confirm transaction on Metamask  
-2- Switch to account 2, **because a blogger can't reward himself**
+2- Switch to account 2, **because a blogger can't reward himself**  
 3- Refresh the page  
 4- Send ether from account 2 to account 1 by clicking the blog row, confirm transaction on Metamask  
 5- Check balances  
