@@ -4263,27 +4263,15 @@
     "version": "0.5.8+commit.23d335f2.Emscripten.clang"
   },
   "networks": {
-    "5777": {
+    "4": {
       "events": {},
       "links": {},
-      "address": "0x118f4fcDB327C7A63FB7783240A6B5C5bf4d9e6c",
-      "transactionHash": "0xfa688a523549c21fe6fcdef8469efc9fa02a97c5829252e9e1139bf6a383cb27"
-    },
-    "1564581431144": {
-      "events": {},
-      "links": {},
-      "address": "0x52f43dC81AFD5cB0Ca57eAD0c5EDfb09D65c5790",
-      "transactionHash": "0x4454f3b1dbabf7e54ac31bc09ed237a1b9a203ebe8c5a825574aa9de57a4a1e4"
-    },
-    "1564582488062": {
-      "events": {},
-      "links": {},
-      "address": "0xA3DE21cdE12dA8aA6F147b02f11B06Fe1AA5EAc6",
-      "transactionHash": "0xe33f075117bea0e373133d7874dbcae0209820a311b700ecf24dafabb42f7947"
+      "address": "0xA0Ce8E6cc3a01499D35b2F8b36CC3e8c7a73Bbd0",
+      "transactionHash": "0x45b88eda43da913cbc0ae3c609383f65b7503848db81b5622a81b49384a9dc8a"
     }
   },
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-31T14:15:26.323Z",
+  "updatedAt": "2019-07-31T14:49:10.873Z",
   "devdoc": {
     "author": "Mohamad Alkhaldi\r",
     "methods": {
