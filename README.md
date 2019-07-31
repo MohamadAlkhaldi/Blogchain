@@ -64,11 +64,11 @@ $ npm run start
 
 ### Use Case
 
-1- Create a blog using account 1, confirm transaction on Metamask
-2- Switch to account 2
-3- Refresh the page
-4- Send ether from account 2 to account 1 by clicking the blog row, confirm transaction on Metamask
-5- Check balances
+1- Create a blog using account 1, confirm transaction on Metamask  
+2- Switch to account 2  
+3- Refresh the page  
+4- Send ether from account 2 to account 1 by clicking the blog row, confirm transaction on Metamask  
+5- Check balances  
 
 ### Deployment
 
