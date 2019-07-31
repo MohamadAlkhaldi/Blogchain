@@ -40,9 +40,9 @@ Blogchain requires
 - Metamask
 
 ## Try it on Rinkeby testnet: 
-Our smart contract is deployed on Rinkeby already, and thanks to INFURA and HDWALLETPROVIDER and you can interact with it using our react front-end,Awesome right!,  the migration files are set, all you need to do:  
+Our smart contract is deployed on Rinkeby already, and thanks to INFURA and hdwallet-provider, you can interact with it using our react front-end, Awesome right!,  the migration files are set, all you need to do:  
 
-1- Login to Metamask switch to Rinkeby testnet  
+1- Login to Metamask, switch to Rinkeby testnet  
 2- Fund your account with some ether https://faucet.rinkeby.io/  
 3- from bellow complete only the "Start front-end server" section **Don't compile nor migrate for now**  
 
@@ -95,7 +95,7 @@ $ truffle migrate
 
 ### Deployment
 
-Blogchain is currently deployed on Ropsten test network only:
+Blogchain is currently deployed on Ropsten and Rinkeby test networks:
 
 | Tesnet |  Link  |
 | ------ | ------ |
