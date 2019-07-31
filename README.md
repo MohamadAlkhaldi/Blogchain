@@ -59,12 +59,22 @@ Start front end server:
 ```sh
 $ cd client
 $ npm install
-$ cd node_modules/websocket install
+$ npm audit fix
+```
+
+If you got an error related to websocket modules run:
+```sh
+$ cd node_modules/websocket
 $ rm -r .git/
 $ cd ../..
 $ npm audit fix
+```
+
+Finally:
+```sh
 $ npm run start
 ```
+
 
 ### Use Case
   
