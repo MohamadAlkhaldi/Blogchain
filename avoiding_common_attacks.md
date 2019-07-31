@@ -1,1 +1,2 @@
-future upgrades security considerations
+As mentioned in the ruubary some security measures should be taken into consideration and discussed in this file.  
+For an early stage MVP, with relativly simple smart contract, I couldn't find serious vounrabilities to address, even after using online tools like Securify to scan the contract for security flaws.

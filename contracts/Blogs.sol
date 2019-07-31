@@ -37,7 +37,22 @@ contract Blogs {
   {
       blogs.push(Blog(msg.sender, _data));
       emit BlogCreated(blogs.length - 1, msg.sender, _data);
-    //   return (blogs.length - 1);
+      return (blogs.length - 1);
+  }
+  
+  /**
+  * @dev getBlogById(): get blog by id, only used in testing
+  * @param _blogId blog id (index) in the blogs array
+  */
+  function getBlogById(
+      uint _blogId
+  )
+      external
+      view
+      returns (string memory)
+  {
+      string storage content = blogs[_blogId].data;
+      return (content);
   }
   
   /**
